@@ -1,0 +1,207 @@
+overfitting:
+	def bc yeh likhni hai ab
+
+	Given a model space H, a specific model h∈H is said to overfit the training data if there exists some alternative model h’∈H, such that h has smaller error than h’ over the training examples, but h’ has smaller error than h over the entire distribution of instances
+
+
+decision tree:
+	inductive learning tas
+		use particular facts to make more generalised conclusion
+	predictive model
+
+	ID3
+		all element in training set belong to same class then return the class
+
+		if attribute is empty then return the max class
+
+		else if training set is empty then return the leaf with default majority class
+
+		else wahi kro jo tumhe pata hai
+
+	entropy:
+		minimum: 0
+		max: log2(C) (C = no. of target class)
+		gain tends to prefer splits that result in large no. of partition each being small but pure
+
+		GainRation -> higher entropy partitioning in penalised
+
+		GINI: min = 0, max = 1-1/c
+
+	overfitting:
+		tree growth went too far
+		no. of instances belonging to node gets smaller as we build the tree
+
+	in this case training error is not a good measure
+
+	adv:
+		inexpensive to construct
+		fast in classfying
+		easy to interpret in small trees
+		good accuracy
+
+	disav:
+		axis parallel decision boundary
+		redundancy
+		need data to fit in memory to train the model
+		need to retrain new data
+
+	preprune:
+		top down approach
+		stop before full growth
+		typical condn:
+			all instance belong to same class
+			all attribute value are same
+		extra:
+			#instance less than specified value
+			class distribution is independent of available features(use chi square test)
+			expanding current node doesnt improve impurity measure(GINI/GAIN)
+
+
+	postprune:
+		bottom up approach
+		split data into train and test
+		create full tree on train
+		while accuracy on the test set increases:
+			evaluate pruning each subtree-> replace by leaf-> majority vote
+			replace subtree with leaf that increases the accuracy most
+
+KNN
+	instance based
+	lazy learner
+	non parametric(no assumption is made)
+	eucledian distance is used usually
+	k-> small = sensitive to noisy data
+	k-> large = majority vote from other classes
+	k < sqrt(n) (rule of thumb)
+
+	we can normalise data and then use weighted distance measure if need to give priority to the feature
+	this weight -> found from cross validation
+
+	pros:
+		simple and intuitive
+		applied to any distribution
+		good accuracy is large samples
+
+	cons:
+		more time
+		choosing k is tricky
+		need large samples for good accuracy
+
+kmeans:
+	unsupervised
+	baaki algo pata hi hai
+	use case:
+		academic performance
+		search engines
+		diagnostic system
+		wireless sensor network
+
+	pros:
+		simple
+		flexible
+		efficient
+		suitable in large dataset
+
+	cons:
+		choosing k can be tricky
+		sensitivity to noise and outlier
+		sensitivity to scale
+		only for numerical data
+
+
+
+ensemble methods
+	minimise variance:
+		bagging
+		random forest
+	minimise bias:
+		boosting-adaboost
+		ensemble selection-choice of classifier
+
+different classifier variety
+	different population
+	different feature
+	different odelling technique
+	different initial seeds
+
+bagging
+	bootstrap aggregation
+	goal: reduce variance
+	D = new sample with same size with random sampling
+	take majority vote
+	variance reduce sub linearly
+	bias increases slightly
+	use 1 type of classifier
+	simple DT are mostly used
+	easy to parallelise
+	0.632 unique samples
+
+Random forest
+	reduce variance
+	sample on data set and feature
+	train DT
+	voting
+	sample size same
+	sampling with replacement over instance
+	sampling without replacement over attributes
+
+boosting:
+	no bootstrap sampling
+	all data sample used sequntially
+	next tree derives from previous tree
+
+adaboost:
+	adaptive boosting
+	each time entire data is used
+	training is sequential
+	results in long tree unlike bagging/rf
+	start with equal weight
+	different weight after iteration
+	final decision: weighted combination of the predicted output at each stage
+	in aggregation with multiple the classifier with the importance factor of that classifier
+	reduce bias i.e. optimise training
+	can reduce variance if DT is pruned after training
+
+naive bayes classifier
+	based on bayes theorem
+	easy to build
+	usefull for large data sets
+
+improve naive bayes model:
+	if continous feature do not have normal distrbution:
+		convert using transformation
+	if test data has zero frequeny issue
+		laplace correction
+	remove correlated feature
+	limited option for parameter tuning
+	can't be ensembled(no variance to reduce)
+
+
+bayesian network:
+	directed acyclic graph
+	node-> random varaible
+	arrow from x to y means x is parent of y
+	need conditional probability and dag to calcyulate probability in bbn
+	parameters are probability in cpt
+
+
+
+
+
+
+
+
+
+
+in rnn tanh function is used to squish the value between -1, 1
+
+LSTM: long short term memory
+GRU: Gated Recurrents units
+	problem with rnn:
+		RNN suffer from short term memory
+		vanishing gradient
+		earlier layers stop learning practically
+	lstm:
+		same control flow as rnn
+		
+
