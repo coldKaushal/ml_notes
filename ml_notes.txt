@@ -1,7 +1,53 @@
+machine learning refers to a system capabale of the autonomous acquisition and integration of knowledge
+
+need for ml:
+	no human experts
+	black box human expertise
+	rapidly changing phenomena
+	need for customisation
+
+data: unprocessed fact
+information: interpreted data, meaningful inference for the user
+knowledge: Combination of inferred information, experiences, learning and insights.
+
+type of data: training, valdation, testing
+
+challenge in ml:
+	avoid overlearing:
+		holdout, cross validn, rgularisation, early stopping
+	curse of dimensionality
+
+	feature selection adn reduction
+		selection:
+			select feature
+			remove that with missing val
+			"	"	"	" 	" " low variance
+			remove highly correlated
+		reduction:
+			pca
+	tuning hyperparameters
+
+
+ml types:
+	supervised: bayesian, dt, linear regression
+	unsupervised: clustering, pca, association rule
+	reinforcement: q learning, monte carlo method
+
+
+
+
 overfitting:
 	def bc yeh likhni hai ab
 
 	Given a model space H, a specific model h∈H is said to overfit the training data if there exists some alternative model h’∈H, such that h has smaller error than h’ over the training examples, but h’ has smaller error than h over the entire distribution of instances
+
+
+roc:
+	receiver operating characteristics
+	tpr vs fpr
+	in roc curve: area under 0.5 is useless
+	auc: area under curve
+
 
 
 decision tree:
@@ -189,6 +235,157 @@ bayesian network:
 
 
 
+SVM:
+	support vector machine
+	supervised
+	dimension-> feature
+	non probabilistic linear classifier
+	regularisation parameter: tells the SVM optimization how much you want to avoid misclassifying each training example.
+	support vector: point closest to hyperplane, most difficult to classify, affects the hyperplane
+
+	kernelling: mapping of data into higher dimension
+	tuning parameter:
+		margin
+		regularisation
+			factor: c
+			c->small: underfit
+			c->large-> overfit
+		gamma
+			define how far influences the calculation of plausible line
+			low gamma: points far from line used in calc
+			high gamma: points close to line used in calc  
+		kerneling
+			mathematical function for transforming data using some linear algebra
+			ex:	linear kernel
+				non linear kerne
+				rbf(radial basis function)
+				sigmoid
+				polynomial
+				exponential
+			K(x, y) = <f(x), f(y)> = f(x).f(y)  (dot product)
+
+	pros:
+		well for clear marginal separation
+		effective in high dimensional plane
+		effective when dimension> sample
+		memry efficient
+
+	cons:
+		large data set: high time
+		noise-> not efficient
+		
+
+
+
+
+
+
+
+
+
+
+ANN
+	artificial neural network
+	simplistic imitation of a brain composed of dense net of simple structures
+	typically 3 or more layers:
+		input, hidden, output(can have multiple hidden layers)
+
+	perceptron:
+		simplified artificial neuron
+		single layer neuron
+		multiple inputs -> activation function ->output
+	a bias 'b' is inroduced in equation which tells how easy is it to fire a perceptron
+
+	backpropogation:
+		calculate the gradient of cost function in a neural network
+
+		used by gradient descent optimisation algo to update weights
+
+	different activation functions:
+		tanh(-1, 1)
+		sigmoid(0,1)
+		reLU(0, infini)
+
+	application:
+		object recognition
+		object classificiation
+		language translation
+		speech recognition
+
+	2 layer ann
+		input -> hidden -> output
+
+backpropogation:
+	short for backward propogation of errors
+	error = 1/2(prediction-actual)^2
+	(1/2 is mathematical convenience)
+	done using gradient descent
+
+rnn:
+	recurrent neural network
+	good at modelling sequence data
+	model:
+
+input -> hidden -> output
+          ^  |
+          |__|
+
+    causes short term memory because of vanishing gradient problem
+    the earlier stage contribute least in the final output and also learns the least
+    to tackle this lstm, gru were proposed
+
+
+
+
+cnn
+	convolution neural network
+	feed forward neural network
+	also called ConvNet
+	broad layers:
+		input layer: accepts pixels of image in form of array
+
+		hidden layer: feature extraction
+
+		output layer: 
+			fully connected layer that identified the object in image
+	hidden layer:
+		1.) convolution layer
+		2.) ReLU layer
+		3.) Pooling Layer
+
+	convolution layer:
+		uses matrix filter and performs convolution operation to detect patterns in the image
+
+	ReLU layer:
+		once the feature maps are extracted the next step is this
+
+		operations:
+			performs element wise operation
+			sets all negative pixel to 0
+			introduces non linearity to network
+			output is rectified feature map
+
+	pooling layer:
+		rectified feature map goes thru this.
+		its a down sampling operation that reduces the dimension of the feature map
+
+		ex: take a 2x2 matrix in the feature matrix and assign a 1x1 cell which is max value of it
+
+		uses different flters to identify different parts of the image like edges, corners beaks of a bird
+
+
+	there are multiple convolution, relu, pooling connected one after another that carry out feature extraction in every layer. input image is scanned multiple times to denerate input feature map
+
+	flattening:
+		process of converting resultant 2 D array from pooled feature map into 1D array
+
+	fully connected -> flattened matrix from the pooling layer is fed as input to fully connected layer to classify the image
+
+
+
+
+
+
 
 
 
@@ -204,4 +401,22 @@ GRU: Gated Recurrents units
 	lstm:
 		same control flow as rnn
 		
+
+
+
+
+
+     1     2
+
+0    3     0
+
+1    2     4
+
+
+2/5, 4/4
+
+
+3/5   1/6
+
+err = irredu + b2 + c*v
 
